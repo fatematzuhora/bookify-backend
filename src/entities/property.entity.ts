@@ -21,7 +21,7 @@ export class PropertyEntity extends AbstractEntity {
     description: string;
 
     @Column()
-    price: string;
+    price: number;
 
     @Column({ type: 'enum', enum: PropertyType })
     type: PropertyType;

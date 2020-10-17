@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
 import { typeOrmConfig } from 'src/config/typeorm.config';
 import { AuthModule } from 'src/auth/auth.module';
 import { CommentModule } from 'src/comment/comment.module';
@@ -9,6 +10,9 @@ import { UserModule } from 'src/user/user.module';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
     TypeOrmModule.forRoot(typeOrmConfig),
     AuthModule,
     CommentModule,
