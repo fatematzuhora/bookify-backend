@@ -1,4 +1,5 @@
-import { IsString, IsNotEmpty, IsNumber, IsEnum } from 'class-validator';
+import { IsEnum, IsIn, IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { UserResponse } from './user.model';
 
 export enum PropertyType {
     SINGLE = 'single',
@@ -27,6 +28,43 @@ export class CreatePropertyDto {
     country: string;
 
     @IsString()
+    @IsNotEmpty()
+    city: string;
+}
+
+export interface PropertyResponse {
+    slug: string;
+    title: string;
+    description: string;
+    price: number;
+    type: PropertyType;
+    country: string;
+    city: string;
+    createdAt: Date | string;
+    updatedAt: Date | string;
+    user: UserResponse;
+}
+
+export interface FindFeedQuery {
+    limit?: number;
+    offset?: number;
+}
+  
+export interface FindAllQuery extends FindFeedQuery {
+    user?: string;
+    rated?: string;
+}
+
+export class PropertyFilterDto {
+    @IsOptional()
+    @IsIn([PropertyType.SINGLE, PropertyType.DOUBLE])
+    type: PropertyType;
+ 
+    @IsOptional()
+    @IsNotEmpty()
+    country: string;
+
+    @IsOptional()
     @IsNotEmpty()
     city: string;
 }

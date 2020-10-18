@@ -7,7 +7,7 @@ import * as slugify from 'slug';
 import { AbstractEntity } from 'src/entities/abstract-entity';
 import { UserEntity } from 'src/entities/user.entity';
 import { CommentEntity } from 'src/entities/comment.entity';
-import { PropertyType } from 'src/models/property.model';
+import { PropertyType, PropertyResponse } from 'src/models/property.model';
   
 @Entity('properties')
 export class PropertyEntity extends AbstractEntity {
@@ -69,5 +69,15 @@ export class PropertyEntity extends AbstractEntity {
 
     toJSON() {
         return classToPlain(this);
+    }
+
+    toProperty(user?: UserEntity): PropertyResponse {
+        let ratedBy = null;
+        if (user) {
+            ratedBy = this.ratedBy.map(user => user.id).includes(user.id);
+        }
+        const property: any = this.toJSON();
+        delete property.ratedBy;
+        return { ...property, ratedBy };
     }
 }

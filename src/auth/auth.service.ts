@@ -37,7 +37,6 @@ export class AuthService {
             return { ...newUser.toJSON(), token };
 
         } catch (err) {
-            console.log(err);
             throw new InternalServerErrorException();
         }
     }
