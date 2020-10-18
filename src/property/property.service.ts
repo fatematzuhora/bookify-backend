@@ -15,18 +15,18 @@ export class PropertyService {
 
     constructor(
         @InjectRepository(PropertyEntity) private propertyRepo: Repository<PropertyEntity>,
-        // @InjectRepository(UserEntity) private userRepo: Repository<UserEntity>,
-        // @InjectRepository(CommentEntity) private commentRepo: Repository<CommentEntity>,
+        @InjectRepository(UserEntity) private userRepo: Repository<UserEntity>,
+        @InjectRepository(CommentEntity) private commentRepo: Repository<CommentEntity>,
     ) {}
 
     async create(
         data: CreatePropertyDto
     ): Promise<any> {
         try {
-            // const property = this.propertyRepo.create(data);
-            // await property.save();
+            const property = this.propertyRepo.create(data);
+            await property.save();
             
-            // return { ...property.toJSON() };
+            return { ...property.toJSON() };
 
         } catch (err) {
             console.log(err);
