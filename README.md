@@ -16,10 +16,35 @@ cd bookify-backend
 ```
 npm i
 ```
+* Create a database in your local machine.
 * Configure your database settings on the following files:
 ```
 - bookify-backend/config/default.yml
 - bookify-backend/config/development.yml
+```
+* Insert your database name on `default.yml` file. For example, here the database name is `bookify`.
+```
+server:
+  port: 8080
+
+db:
+  type: 'mysql'
+  port: 3306
+  database: 'bookify'
+
+jwt:
+  expiresIn: 3600
+```
+* Insert your database username and password on `development.yml` file. For example, here the username is `root` and the password is empty.
+```
+db:
+  host: 'localhost'
+  username: 'root'
+  password: ''
+  synchronize: true
+
+jwt:
+  secret: 'topSecret2021'
 ```
 * Run Project:
 ```
