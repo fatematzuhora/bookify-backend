@@ -42,9 +42,6 @@ db:
   username: 'root'
   password: ''
   synchronize: true
-
-jwt:
-  secret: 'topSecret2021'
 ```
 * Run Project:
 ```
