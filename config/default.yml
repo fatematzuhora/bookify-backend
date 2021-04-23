@@ -1,10 +1,3 @@
-server:
-  port: 8080
-
 db:
   type: 'mysql'
-  port: 3306
-  database: 'bookify'
-
-jwt:
-  expiresIn: 3600
+  synchronize: false

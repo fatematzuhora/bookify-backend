@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
-import { PropertyController } from './property.controller';
-import { PropertyService } from './property.service';
+import { PropertyController } from 'src/property/property.controller';
+import { PropertyService } from 'src/property/property.service';
 import { PropertyEntity } from 'src/entities/property.entity';
 import { UserEntity } from 'src/entities/user.entity';
 import { CommentEntity } from 'src/entities/comment.entity';

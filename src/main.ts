@@ -1,22 +1,35 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
-import * as config from 'config';
+import { AppModule } from 'src/app.module';
+
+import * as env from 'src/config/env.config';
 
 async function bootstrap() {
-  const serverConfig = config.get('server');
   const logger = new Logger('bootstrap');
+
   const app = await NestFactory.create(AppModule);
+
   app.setGlobalPrefix('api');
 
-  if (process.env.NODE_ENV === 'development') {
+  if (env.NODE_ENV === 'development') {
     app.enableCors();
   } else {
-    app.enableCors({ origin: serverConfig.origin });
-    logger.log(`Accepting requests from origin "${serverConfig.origin}"`);
+    app.enableCors({
+      origin: function (origin, callback) {
+        if (env.ORIGINS.indexOf(origin) !== -1) {
+          callback(null, true);
+        } else {
+          callback(new Error(`Not allowed by CORS`), false);
+        }
+      },
+      allowedHeaders: 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe',
+      methods: 'GET,POST,PUT,PATCH,DELETE,UPDATE,OPTIONS',
+      credentials: true,
+    });
+    logger.log(`Accepting requests from origin "${env.ORIGINS}"`);
   }
   
-  const port = process.env.PORT || serverConfig.port;
+  const port = env.NODE_PORT;
   await app.listen(port);
   
   logger.log(`Application listening on port ${port}`);

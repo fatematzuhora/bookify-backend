@@ -1,11 +1,11 @@
 import {
-    ConflictException, InternalServerErrorException, Injectable, Inject,
+    ConflictException, InternalServerErrorException, Injectable,
     UnauthorizedException, Logger
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { JwtPayload } from './jwt-payload.interface';
+import { JwtPayload } from 'src/auth/jwt-payload.interface';
 import { SignInDto, SignUpDto, AuthResponse } from 'src/models/auth.model';
 import { UserEntity } from 'src/entities/user.entity';
 

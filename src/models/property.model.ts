@@ -1,5 +1,5 @@
 import { IsEnum, IsIn, IsString, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
-import { UserResponse } from './user.model';
+import { UserResponse } from 'src/models/user.model';
 
 export enum PropertyType {
     SINGLE = 'single',

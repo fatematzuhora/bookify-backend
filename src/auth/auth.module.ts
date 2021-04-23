@@ -3,12 +3,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { UserEntity } from 'src/entities/user.entity';
-import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
-import { JwtStrategy } from './jwt.strategy';
-import * as config from 'config';
+import { AuthService } from 'src/auth/auth.service';
+import { AuthController } from 'src/auth/auth.controller';
+import { JwtStrategy } from 'src/auth/jwt.strategy';
 
-const jwtConfig = config.get('jwt');
+import { JWT_SECRET_KEY, JWT_EXPIRES_IN } from 'src/config/env.config';
 
 @Module({
   imports: [
@@ -16,9 +15,9 @@ const jwtConfig = config.get('jwt');
       defaultStrategy: 'jwt'
     }),
     JwtModule.register({
-      secret: process.env.JWT_SECRET || jwtConfig.secret,
+      secret: JWT_SECRET_KEY,
       signOptions: {
-        expiresIn: jwtConfig.expiresIn
+        expiresIn: JWT_EXPIRES_IN
       }
     }),
     TypeOrmModule.forFeature([UserEntity])

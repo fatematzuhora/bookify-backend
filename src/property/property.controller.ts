@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query, UseGuards, ValidationPipe } from '@nestjs/common';
 import { CreatePropertyDto, PropertyFilterDto, PropertyResponse } from 'src/models/property.model';
-import { PropertyService } from './property.service';
+import { PropertyService } from 'src/property/property.service';
 import { UserEntity } from 'src/entities/user.entity';
 import { User } from 'src/auth/auth.decorator';
 import { AuthGuard } from '@nestjs/passport';

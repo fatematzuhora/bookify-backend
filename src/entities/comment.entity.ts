@@ -1,5 +1,4 @@
 import { Column, Entity, ManyToOne } from 'typeorm';
-import { classToPlain } from 'class-transformer';
 import { AbstractEntity } from 'src/entities/abstract-entity';
 import { UserEntity } from 'src/entities/user.entity';
 import { PropertyEntity } from 'src/entities/property.entity';
